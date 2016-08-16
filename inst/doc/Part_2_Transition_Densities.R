@@ -22,7 +22,7 @@ Jlam  <- function(t){nu}
 
  M <- JGQD.density(Xs,Xt,s,t,dt, Jdist = 'Exponential', factorize = TRUE)
 
- persp(x=M$Xt,y=M$time,z=M$density,col='green',xlab='State (X_t)',ylab='Time (t)',
+ persp(x=M$Xt,y=M$time,z=M$density,col='white',xlab='State (X_t)',ylab='Time (t)',
       zlab='Density f(X_t|X_s)',border=NA,shade=0.5,theta=145)
 
 ## ------------------------------------------------------------------------
@@ -52,7 +52,7 @@ Jsig  <- function(t){sigma_z}
 
  M <- JGQD.density(Xs,Xt,s,t,dt, Jdist = 'Normal')
 
- persp(x=M$Xt,y=M$time,z=M$density,col='green',xlab='State (X_t)',ylab='Time (t)', zlab='Density f(X_t|X_s)',border=NA,shade=0.5,theta=145)
+ persp(x=M$Xt,y=M$time,z=M$density,col='white',xlab='State (X_t)',ylab='Time (t)', zlab='Density f(X_t|X_s)',border=NA,shade=0.5,theta=145)
 
 ## ----fig.align = 'center'------------------------------------------------
  Xt <- seq(5.5,8,1/50)
@@ -197,11 +197,11 @@ simulate <- function(x0=4,N=25000,pts = 1:4)
  {
   plot(res2$MM[i,]~res2$tt,type='l',main='Moment trajectory',xlab='Time (t)',
        ylab=paste0('m_',i,'(t)'))
-  lines(res$moments[i,]~res$time,lty='dashed',col='red',lwd=2)
+  lines(res$moments[i,]~res$time,lty='dashed',col='blue',lwd=2)
  }
 
 ## ----fig.align='center'--------------------------------------------------
- persp(x=res$Xt,y=res$time,z=res$density,col='green',xlab='State (X_t)',ylab='Time (t)', zlab='Density f(X_t|X_s)',border=NA,shade=0.5,theta=145)
+ persp(x=res$Xt,y=res$time,z=res$density,col='white',xlab='State (X_t)',ylab='Time (t)', zlab='Density f(X_t|X_s)',border=NA,shade=0.5,theta=145)
  
  par(mfrow=c(2,2))
  for(i in 1:4)
@@ -223,7 +223,7 @@ res <- JGQD.density(4,seq(2,8,1/10),0,TT,1/100, factorize = TRUE)
 # Re-simulate and record histograms at new points:
 res2 <- simulate(pts=seq(0.1,0.4,0.1))
 
-persp(x=res$Xt,y=res$time,z=res$density,col='green',xlab='State (X_t)',ylab='Time (t)', zlab='Density f(X_t|X_s)',border=NA,shade=0.5,theta=145)
+persp(x=res$Xt,y=res$time,z=res$density,col='white',xlab='State (X_t)',ylab='Time (t)', zlab='Density f(X_t|X_s)',border=NA,shade=0.5,theta=145)
 
 par(mfrow=c(2,2))
 for(i in 1:4)

@@ -10,7 +10,7 @@
 #  Jsig <- function(t){0.5}
 
 ## ----fig.align = 'center'------------------------------------------------
-mu      <- 0.1
+mu.x    <- 0.1
 sigma.x <- 0.5
 lam     <- 0.5
 mu.z    <- 0.1
@@ -18,10 +18,10 @@ sigma.z <- 0.5
 
 true.density=function(X0,Xt,t,order =10)
 {
-   dens <- 1/sqrt(2*pi*sigma.x^2*t)*exp(-(Xt-X0)^2/(2*sigma.x^2*t)+mu/sigma.x^2*(Xt-X0))*exp(-(mu^2/(2*sigma.x^2)+lam)*t)
-   for(j in 1:order)
+   dens <- exp(-lam*t)*dnorm(Xt,X0+mu.x*t,sqrt(sigma.x^2*t))    
+    for(i in 1:order)
    {
-      dens <-  dens +exp(-lam*t)*lam^j/(factorial(j)*sqrt(2*pi)*sqrt(sigma.x^2*t+j*sigma.z^2))*exp(-(Xt-X0-mu*t-j*mu.z)^2/(2*(sigma.x^2*t+j*sigma.z^2)))*t^j
+      dens <-  dens +exp(-lam*t)*(lam*t)^i/factorial(i)*dnorm(Xt,X0+mu.x*t+i*mu.z*t,sqrt(sigma.x^2*t+i*sigma.z^2*t))
    }
    return(list(density=dens,Xt=Xt))
 }
@@ -35,7 +35,7 @@ library(DiffusionRjgqd)
 JGQD.remove()
 
 # Define the model coefficients:
-G0   <- function(t){mu}
+G0   <- function(t){mu.x}
 Q0   <- function(t){sigma.x^2}
 Lam0 <- function(t){lam}
 Jmu  <- function(t){mu.z}
